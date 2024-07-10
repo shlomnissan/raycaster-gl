@@ -1,6 +1,6 @@
 # Raycaster
 
-A simple raycasting engine using OpenGL and modern C++
+A simple raycasting engine using OpenGL and modern C++.
 
 ## Overview
 

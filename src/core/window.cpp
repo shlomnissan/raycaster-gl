@@ -1,7 +1,7 @@
 // Copyright 2024 Betamark Pty Ltd. All rights reserved.
 // Author: Shlomi Nissan (shlomi@betamark.com)
 
-#include "window.h"
+#include "window.hpp"
 
 #include <GLFW/glfw3.h>
 #include <fmt/format.h>

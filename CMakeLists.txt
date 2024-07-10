@@ -22,9 +22,9 @@ find_package(glm REQUIRED)
 
 set(CORE_SOURCES
     src/core/shader.cpp
-    src/core/shader.h
+    src/core/shader.hpp
     src/core/window.cpp
-    src/core/window.h
+    src/core/window.hpp
 )
 
 set(LIBS_SOURCES

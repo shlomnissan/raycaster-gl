@@ -6,8 +6,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "core/shader.h"
-#include "core/window.h"
+#include "core/shader.hpp"
+#include "core/window.hpp"
 
 #include "shaders/headers/vertex.h"
 #include "shaders/headers/fragment.h"
