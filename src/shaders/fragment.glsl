@@ -2,8 +2,13 @@
 #pragma debug(on)
 #pragma optimize(off)
 
-out vec4 final_color;
+layout (location = 0) out vec4 outFragColor;
+
+in vec2 TexCoords;
+
+uniform sampler2D Texture0;
 
 void main() {
-    final_color = vec4(1.0, 1.0, 1.0, 1.0);
+    vec3 pixel_color = texture(Texture0, TexCoords).rgb;
+    outFragColor = vec4(pixel_color, 1.0);
 }

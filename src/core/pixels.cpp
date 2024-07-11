@@ -17,6 +17,30 @@ Pixels::Pixels(unsigned width, unsigned height)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-// TODO: implement Use()
+auto Pixels::PutPixel(unsigned x, unsigned y, RGB color) -> void {
+    if (x < 0 || x >= width_ || y < 0 || y >= height_) {
+        return;
+    }
+
+    y = height_ - y - 1;
+
+    auto index = (y * width_ + x) * 3;
+    data_[index] = color.r;
+    data_[index + 1] = color.g;
+    data_[index + 2] = color.b;
+
+    dirty_ = true;
+}
+
+auto Pixels::Draw() -> void {
+    if (!dirty_) return;
+
+    glBindTexture(GL_TEXTURE_2D, texture_);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width_, height_, GL_RGB, GL_UNSIGNED_BYTE, data_.data());
+
+    dirty_ = false;
+}

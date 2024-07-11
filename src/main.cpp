@@ -27,7 +27,16 @@ auto main() -> int {
     auto mesh = Mesh { plane.vertices(), plane.indices() };
     auto pixels = Pixels {width, height};
 
+    for (auto i = 0; i < width; ++i) {
+        for (auto j = 0; j < height; j += 3) {
+            pixels.PutPixel(i, j, {.r = 255, .g = 0, .b = 0});
+            pixels.PutPixel(i, j + 1, {.r = 0, .g = 255, .b = 0});
+            pixels.PutPixel(i, j + 2, {.r = 0, .g = 0, .b = 255});
+        }
+    }
+
     window.Start([&](const double delta){
+        pixels.Draw();
         mesh.Draw(shader);
     });
 
