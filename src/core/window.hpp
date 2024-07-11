@@ -17,12 +17,8 @@ public:
 
     auto Start(const std::function<void(const double delta)>& program) -> void;
 
-    auto on_resize(ResizeCallback callback) { on_resize_ = callback; }
-    auto on_resize() { return on_resize_; }
-
     ~Window();
 
 private:
     GLFWwindow* window_ {nullptr};
-    ResizeCallback on_resize_;
 };

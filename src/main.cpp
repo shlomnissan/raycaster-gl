@@ -22,22 +22,11 @@ auto main() -> int {
         {ShaderType::kFragmentShader, _SHADER_fragment}
     }};
 
-    glEnable(GL_DEPTH_TEST);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-    auto updateProjection = [&shader](int width, int height) {
-        auto ratio = static_cast<float>(width) / static_cast<float>(height);
-        shader.SetMat4("Projection", glm::perspective(45.0f, ratio, 0.1f, 100.0f));
-    };
-
-    updateProjection(width, height);
-    window.on_resize([&updateProjection](const int width, const int height){
-        updateProjection(width, height);
-    });
+    auto ratio = static_cast<float>(width) / static_cast<float>(height);
+    shader.SetMat4("Projection", glm::perspective(45.0f, ratio, 0.1f, 100.0f));
 
     window.Start([&](const double delta){
-        glClearColor(0.0f, 0.0f, 0.5f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        // TODO: game loop
     });
 
     return 0;
