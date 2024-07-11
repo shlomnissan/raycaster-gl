@@ -2,6 +2,7 @@
 // Author: Shlomi Nissan (shlomi@betamark.com)
 
 #include "core/mesh.hpp"
+#include "core/pixels.hpp"
 #include "core/plane.hpp"
 #include "core/shader.hpp"
 #include "core/window.hpp"
@@ -24,6 +25,7 @@ auto main() -> int {
 
     auto plane = Plane {1.9, 1.9, 1, 1};
     auto mesh = Mesh { plane.vertices(), plane.indices() };
+    auto pixels = Pixels {width, height};
 
     window.Start([&](const double delta){
         mesh.Draw(shader);

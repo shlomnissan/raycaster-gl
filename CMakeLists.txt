@@ -21,8 +21,10 @@ find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
 set(CORE_SOURCES
-    src/core/mesh.hpp
     src/core/mesh.cpp
+    src/core/mesh.hpp
+    src/core/pixels.cpp
+    src/core/pixels.hpp
     src/core/plane.cpp
     src/core/plane.hpp
     src/core/shader.cpp
