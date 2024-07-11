@@ -48,6 +48,7 @@ auto Window::Start(const std::function<void(const double delta)> &program) -> vo
     auto last_frame = 0.0f;
     while(!glfwWindowShouldClose(window_)) {
         glClearColor(0.0f, 0.0f, 0.5f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         auto time = glfwGetTime();
         auto delta = time - last_frame;
@@ -57,8 +58,6 @@ auto Window::Start(const std::function<void(const double delta)> &program) -> vo
 
         glfwSwapBuffers(window_);
         glfwPollEvents();
-
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 }
 
