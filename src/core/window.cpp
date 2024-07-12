@@ -19,11 +19,12 @@ Window::Window(int width, int height, std::string_view title) {
     }
 
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, 1);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_TRUE);
 
     window_ = glfwCreateWindow(width, height, title.data(), nullptr, nullptr);
 
@@ -40,7 +41,11 @@ Window::Window(int width, int height, std::string_view title) {
     glfwSwapInterval(1);
     glfwSetWindowUserPointer(window_, this);
 
-    glViewport(0, 0, width, height);
+    auto buffer_width {0};
+    auto buffer_height {0};
+    glfwGetFramebufferSize(window_, &buffer_width, &buffer_height);
+
+    glViewport(0, 0, buffer_width, buffer_height);
     glEnable(GL_DEPTH_TEST);
 }
 
