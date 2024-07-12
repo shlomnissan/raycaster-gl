@@ -19,9 +19,13 @@ public:
 
     ~Pixels();
 
-    auto SetStroke(RGB color) { stroke_color_ = color; }
+    auto SetStroke(RGB color) -> void;
 
-    auto SetFill(RGB color) { fill_color_ = color; }
+    auto SetFill(RGB color) -> void;
+
+    auto NoStroke() { no_stroke_ = true; }
+
+    auto NoFill() { no_fill_ = true; }
 
     auto Line(unsigned x1, unsigned y1, unsigned x2, unsigned y2) -> void;
 
@@ -33,6 +37,8 @@ public:
 
 private:
     bool dirty_ {false};
+    bool no_stroke_ {false};
+    bool no_fill_ {false};
 
     unsigned texture_ {0};
     unsigned width_ {0};

@@ -26,10 +26,19 @@ auto main() -> int {
     auto screen = Mesh { plane.vertices(), plane.indices() };
     auto pixels = Pixels {width, height};
 
+    pixels.SetStroke({0, 255, 0});
+    pixels.SetFill({255, 0, 0});
+
+    auto dx = 20, vx = 1;
+
     window.Start([&](const double delta){
         pixels.Clear();
 
-        pixels.Line(100, 100, 300, 400);
+        pixels.Rect(dx, 100, 100, 100);
+
+        if (dx + 100 >= width - 20) vx = -1;
+        if (dx <= 20) vx = 1;
+        dx += vx;
 
         pixels.Bind();
         screen.Draw(shader);
