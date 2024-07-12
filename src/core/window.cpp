@@ -24,7 +24,10 @@ Window::Window(int width, int height, std::string_view title) {
     glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_TRUE);
+
+    #ifdef __APPLE__
+        glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_TRUE);
+    #endif
 
     window_ = glfwCreateWindow(width, height, title.data(), nullptr, nullptr);
 
@@ -44,8 +47,8 @@ Window::Window(int width, int height, std::string_view title) {
     auto buffer_width {0};
     auto buffer_height {0};
     glfwGetFramebufferSize(window_, &buffer_width, &buffer_height);
-
     glViewport(0, 0, buffer_width, buffer_height);
+
     glEnable(GL_DEPTH_TEST);
 }
 

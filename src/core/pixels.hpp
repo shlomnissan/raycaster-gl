@@ -17,6 +17,8 @@ class Pixels {
 public:
     Pixels(unsigned width, unsigned height);
 
+    ~Pixels();
+
     auto PutPixel(unsigned x, unsigned y, RGB color) -> void;
 
     auto Draw() -> void;
