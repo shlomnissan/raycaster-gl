@@ -8,9 +8,9 @@
 #include <glad/glad.h>
 
 struct RGB {
-    unsigned r {0};
-    unsigned g {0};
-    unsigned b {0};
+    unsigned char r {0};
+    unsigned char g {0};
+    unsigned char b {0};
 };
 
 class Pixels {
@@ -19,9 +19,13 @@ public:
 
     ~Pixels();
 
-    auto PutPixel(unsigned x, unsigned y, RGB color) -> void;
+    auto SetStroke(RGB color) { stroke_color_ = color; }
 
-    auto Line(unsigned x1, unsigned y1, unsigned x2, unsigned y2, RGB color) -> void;
+    auto SetFill(RGB color) { fill_color_ = color; }
+
+    auto Line(unsigned x1, unsigned y1, unsigned x2, unsigned y2) -> void;
+
+    auto Rect(unsigned x, unsigned y, unsigned width, unsigned height) -> void;
 
     auto Clear() -> void;
 
@@ -34,5 +38,10 @@ private:
     unsigned width_ {0};
     unsigned height_ {0};
 
+    RGB stroke_color_ {255, 255, 255};
+    RGB fill_color_ {255, 255, 255};
+
     std::vector<unsigned char> data_;
+
+    auto PutPixel(unsigned x, unsigned y, RGB color) -> void;
 };

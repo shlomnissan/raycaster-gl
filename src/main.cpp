@@ -29,7 +29,7 @@ auto main() -> int {
     window.Start([&](const double delta){
         pixels.Clear();
 
-        pixels.Line(100, 100, 300, 400, {.r = 210, .g = 143, .b = 80});
+        pixels.Line(100, 100, 300, 400);
 
         pixels.Bind();
         screen.Draw(shader);

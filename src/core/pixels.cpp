@@ -12,18 +12,14 @@ Pixels::Pixels(unsigned width, unsigned height)
   : data_(width * height * RGB_SIZE, 0), width_(width), height_(height) {
     glGenTextures(1, &texture_);
     glBindTexture(GL_TEXTURE_2D, texture_);
-
     glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGB8, width, height);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, data_.data());
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 }
 
 auto Pixels::PutPixel(unsigned x, unsigned y, RGB color) -> void {
-    if (x < 0 || x >= width_ || y < 0 || y >= height_) {
+    if (x >= width_ || y >= height_) {
         return;
     }
 
@@ -37,7 +33,7 @@ auto Pixels::PutPixel(unsigned x, unsigned y, RGB color) -> void {
     dirty_ = true;
 }
 
-auto Pixels::Line(unsigned x1, unsigned y1, unsigned x2, unsigned y2, RGB color) -> void {
+auto Pixels::Line(unsigned x1, unsigned y1, unsigned x2, unsigned y2) -> void {
     auto delta_x = static_cast<int>(x2 - x1);
     auto delta_y = static_cast<int>(y2 - y1);
     auto sign_x = delta_x < 0 ? -1 : 1;
@@ -51,15 +47,19 @@ auto Pixels::Line(unsigned x1, unsigned y1, unsigned x2, unsigned y2, RGB color)
         for (auto i = 0; i < delta_y; ++i) {
             auto px = slope * i + x1;
             auto py = i + y1;
-            PutPixel(px, py, color);
+            PutPixel(px, py, stroke_color_);
         }
     } else {
         for (auto i = 0; i < delta_x; ++i) {
             auto px = i + x1;
             auto py = slope * i + y1;
-            PutPixel(px, py, color);
+            PutPixel(px, py, stroke_color_);
         }
     }
+}
+
+auto Pixels::Rect(unsigned x, unsigned y, unsigned width, unsigned height) -> void {
+    // TODO: impl.
 }
 
 auto Pixels::Clear() -> void {
