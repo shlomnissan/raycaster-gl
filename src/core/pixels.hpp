@@ -21,7 +21,11 @@ public:
 
     auto PutPixel(unsigned x, unsigned y, RGB color) -> void;
 
-    auto Draw() -> void;
+    auto Line(unsigned x1, unsigned y1, unsigned x2, unsigned y2, RGB color) -> void;
+
+    auto Clear() -> void;
+
+    auto Bind() -> void;
 
 private:
     bool dirty_ {false};
