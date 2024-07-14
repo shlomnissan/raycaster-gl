@@ -29,6 +29,7 @@ set(CORE_SOURCES
     src/core/plane.hpp
     src/core/shader.cpp
     src/core/shader.hpp
+    src/core/timer.hpp
     src/core/window.cpp
     src/core/window.hpp
 )

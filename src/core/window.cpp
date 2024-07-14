@@ -53,15 +53,14 @@ Window::Window(int width, int height, std::string_view title) {
 }
 
 auto Window::Start(const std::function<void(const double delta)> &program) -> void {
-    auto last_frame = 0.0f;
+    timer_.Reset();
+
     while(!glfwWindowShouldClose(window_)) {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        auto time = glfwGetTime();
-        auto delta = time - last_frame;
-        last_frame = time;
-
+        auto delta = timer_.GetSeconds();
+        timer_.Reset();
         program(delta);
 
         glfwSwapBuffers(window_);

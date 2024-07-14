@@ -9,6 +9,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "core/timer.hpp"
+
 using ResizeCallback = std::function<void(const int, const int)>;
 
 class Window {
@@ -21,4 +23,5 @@ public:
 
 private:
     GLFWwindow* window_ {nullptr};
+    Timer timer_;
 };
