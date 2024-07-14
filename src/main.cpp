@@ -26,16 +26,24 @@ auto main() -> int {
     pixels.SetStroke({0, 255, 0});
     pixels.SetFill({255, 0, 0});
 
-    auto dx = 20, vx = 1;
+    auto x_pos = 0.0, speed = 100.0;
 
     window.Start([&](const double delta){
         pixels.Clear();
 
-        pixels.Rect(dx, 100, 100, 100);
+        // update
+        if (x_pos > width - 100) {
+            speed *= -1;
+            x_pos = width - 100;
+        }
+        if (x_pos < 0) {
+            speed *= -1;
+            x_pos = 0;
+        }
+        x_pos += speed * delta;
 
-        if (dx + 100 >= width - 20) vx = -1;
-        if (dx <= 20) vx = 1;
-        dx += vx;
+        // draw
+        pixels.Rect(x_pos, 100, 100, 100);
 
         pixels.Bind();
         screen.Draw(shader);
