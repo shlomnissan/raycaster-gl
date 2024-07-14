@@ -10,9 +10,6 @@
 #include "shaders/headers/vertex.h"
 #include "shaders/headers/fragment.h"
 
-#define BUFFER_OFFSET(offset) ((void*)(offset * sizeof(GLfloat)))
-#define STRIDE(stride) (sizeof(GLfloat) * stride)
-
 auto main() -> int {
     constexpr auto width = 800;
     constexpr auto height = 600;

@@ -37,8 +37,6 @@ auto Pixels::PutPixel(unsigned x, unsigned y, RGB color) -> void {
     data_[index] = color.r;
     data_[index + 1] = color.g;
     data_[index + 2] = color.b;
-
-    dirty_ = true;
 }
 
 auto Pixels::Line(unsigned x1, unsigned y1, unsigned x2, unsigned y2) -> void {
@@ -103,8 +101,6 @@ auto Pixels::Rect(unsigned x, unsigned y, unsigned width, unsigned height) -> vo
             data_[px + 2] = fill_color_.b;
         }
     }
-
-    dirty_ = true;
 }
 
 auto Pixels::Clear() -> void {
@@ -112,9 +108,7 @@ auto Pixels::Clear() -> void {
 }
 
 auto Pixels::Bind() -> void {
-    if (!dirty_) return;
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width_, height_, GL_RGB, GL_UNSIGNED_BYTE, data_.data());
-    dirty_ = false;
 }
 
 Pixels::~Pixels() {

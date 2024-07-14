@@ -36,7 +36,6 @@ public:
     auto Bind() -> void;
 
 private:
-    bool dirty_ {false};
     bool no_stroke_ {false};
     bool no_fill_ {false};
 
