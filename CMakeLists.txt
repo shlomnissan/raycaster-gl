@@ -38,11 +38,13 @@ set(LIBS_SOURCES
     libs/glad/glad.c
 )
 
-set(DEMO_SOURCES
-    src/main.cpp
+set(GAME_SOURCES
+    src/game/level.cpp
+    src/game/level.hpp
+    src/game/main.cpp
 )
 
-add_executable(raycaster-gl ${LIBS_SOURCES} ${CORE_SOURCES} ${DEMO_SOURCES})
+add_executable(raycaster-gl ${LIBS_SOURCES} ${CORE_SOURCES} ${GAME_SOURCES})
 
 target_include_directories(raycaster-gl PRIVATE
     ${CMAKE_SOURCE_DIR}/src
