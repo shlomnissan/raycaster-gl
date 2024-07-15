@@ -3,9 +3,16 @@
 
 #pragma once
 
+#include <functional>
+#include <memory>
+#include <string_view>
 #include <vector>
 
 #include <glad/glad.h>
+
+#include "core/mesh.hpp"
+#include "core/window.hpp"
+#include "core/shader.hpp"
 
 struct RGB {
     unsigned char r {0};
@@ -13,11 +20,20 @@ struct RGB {
     unsigned char b {0};
 };
 
+using DrawCallback = std::function<void()>;
+using UpdateCallback = std::function<void(const double delta)>;
+
 class Pixels {
 public:
-    Pixels(unsigned width, unsigned height);
+    Pixels(unsigned width, unsigned height, std::string_view title);
 
     ~Pixels();
+
+    auto Draw(DrawCallback c) { draw_ = c; }
+
+    auto Update(UpdateCallback c) { update_ = c; }
+
+    auto Run() -> void;
 
     auto SetStroke(RGB color) -> void;
 
@@ -46,7 +62,17 @@ private:
     RGB stroke_color_ {255, 255, 255};
     RGB fill_color_ {255, 255, 255};
 
+    UpdateCallback update_;
+    DrawCallback draw_;
+
     std::vector<unsigned char> data_;
+
+    std::unique_ptr<Mesh> screen_;
+
+    Window window_;
+    Shader shader_;
+
+    auto InitTexture() -> void;
 
     auto PutPixel(unsigned x, unsigned y, RGB color) -> void;
 };

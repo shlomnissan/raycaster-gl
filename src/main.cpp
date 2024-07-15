@@ -1,53 +1,35 @@
 // Copyright 2024 Betamark Pty Ltd. All rights reserved.
 // Author: Shlomi Nissan (shlomi@betamark.com)
 
-#include "core/mesh.hpp"
 #include "core/pixels.hpp"
-#include "core/plane.hpp"
-#include "core/shader.hpp"
-#include "core/window.hpp"
 
-#include "shaders/headers/vertex.h"
-#include "shaders/headers/fragment.h"
+constexpr auto WIDTH = 800;
+constexpr auto HEIGHT = 600;
 
 auto main() -> int {
-    constexpr auto width = 800;
-    constexpr auto height = 600;
-    auto window = Window {width, height, "Raycaster in OpenGL"};
-    auto shader = Shader {{
-        {ShaderType::kVertexShader, _SHADER_vertex},
-        {ShaderType::kFragmentShader, _SHADER_fragment}
-    }};
-
-    auto plane = Plane {2, 2, 1, 1};
-    auto screen = Mesh { plane.vertices(), plane.indices() };
-    auto pixels = Pixels {width, height};
-
+    auto pixels = Pixels {WIDTH, HEIGHT, "Raycaster in OpenGL"};
     pixels.SetStroke({0, 255, 0});
     pixels.SetFill({255, 0, 0});
 
     auto x_pos = 0.0, speed = 100.0;
 
-    window.Start([&](const double delta){
-        pixels.Clear();
-
-        // update
-        if (x_pos > width - 100) {
+    pixels.Update([&](const double delta) {
+        if (x_pos > WIDTH - 100) {
             speed *= -1;
-            x_pos = width - 100;
+            x_pos = WIDTH - 100;
         }
         if (x_pos < 0) {
             speed *= -1;
             x_pos = 0;
         }
         x_pos += speed * delta;
-
-        // draw
-        pixels.Rect(x_pos, 100, 100, 100);
-
-        pixels.Bind();
-        screen.Draw(shader);
     });
+
+    pixels.Draw([&]() {
+        pixels.Rect(x_pos, 100, 100, 100);
+    });
+
+    pixels.Run();
 
     return 0;
 }

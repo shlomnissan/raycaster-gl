@@ -11,7 +11,7 @@ constexpr auto callback_error =
     fmt::print("Error ({}): {}\n", error, message);
 };
 
-Window::Window(int width, int height, std::string_view title) {
+Window::Window(unsigned width, unsigned height, std::string_view title) {
     glfwSetErrorCallback(callback_error);
 
     if (!glfwInit()) {

@@ -15,7 +15,7 @@ using ResizeCallback = std::function<void(const int, const int)>;
 
 class Window {
 public:
-    Window(int width, int height, std::string_view title);
+    Window(unsigned width, unsigned height, std::string_view title);
 
     auto Start(const std::function<void(const double delta)>& program) -> void;
 
