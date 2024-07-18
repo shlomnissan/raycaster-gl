@@ -42,6 +42,8 @@ set(GAME_SOURCES
     src/game/level.cpp
     src/game/level.hpp
     src/game/main.cpp
+    src/game/player.cpp
+    src/game/player.hpp
 )
 
 add_executable(raycaster-gl ${LIBS_SOURCES} ${CORE_SOURCES} ${GAME_SOURCES})
