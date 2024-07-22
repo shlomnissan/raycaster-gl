@@ -12,7 +12,12 @@ public:
     static constexpr unsigned TILE_SIZE = 64;
 
     auto Rows() const { return static_cast<unsigned>(data_.size()); }
+
     auto Cols() const { return static_cast<unsigned>(data_.front().size()); }
+
+    auto Width() const { return Cols() * Level::TILE_SIZE; }
+
+    auto Height() const { return Rows() * Level::TILE_SIZE; }
 
     auto DrawMinimap(Pixels& pixels) const -> void;
 

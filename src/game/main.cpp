@@ -4,15 +4,12 @@
 #include "core/pixels.hpp"
 
 #include "game/level.hpp"
+#include "game/player.hpp"
 
 auto main() -> int {
     auto level = Level {};
-
-    auto pixels = Pixels {
-        level.Cols() * Level::TILE_SIZE,
-        level.Rows() * Level::TILE_SIZE,
-        "Raycaster OpenGL"
-    };
+    auto player = Player { level };
+    auto pixels = Pixels { level.Width(), level.Height(), "Raycaster OpenGL" };
 
     pixels.Update([&](const double delta) {
         // TODO: impl.
@@ -20,6 +17,7 @@ auto main() -> int {
 
     pixels.Draw([&]() {
         level.DrawMinimap(pixels);
+        player.DrawMinimap(pixels);
     });
 
     pixels.Run();
