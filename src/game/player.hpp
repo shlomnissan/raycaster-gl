@@ -14,8 +14,10 @@ public:
     auto DrawMinimap(Pixels& pixels) const -> void;
 
 private:
-    float x_ = 0;
-    float y_ = 0;
+    static constexpr unsigned size_ = 10;
+
+    unsigned x_ = 0;
+    unsigned y_ = 0;
 
     Level level_;
 

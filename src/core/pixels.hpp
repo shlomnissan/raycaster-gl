@@ -29,17 +29,21 @@ public:
 
     ~Pixels();
 
-    auto Draw(DrawCallback c) { draw_ = c; }
+    auto Draw(const DrawCallback& c) { draw_ = c; }
 
-    auto Update(UpdateCallback c) { update_ = c; }
+    auto Update(const UpdateCallback& c) { update_ = c; }
 
     auto Run() -> void;
 
+    auto ResetStroke() -> void;
+
     auto SetStroke(RGB color) -> void;
 
-    auto SetFill(RGB color) -> void;
-
     auto NoStroke() { no_stroke_ = true; }
+
+    auto ResetFill() -> void;
+
+    auto SetFill(RGB color) -> void;
 
     auto NoFill() { no_fill_ = true; }
 

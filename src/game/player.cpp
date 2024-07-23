@@ -4,10 +4,12 @@
 #include "player.hpp"
 
 Player::Player(const Level& level) : level_(level) {
-    x_ = static_cast<float>(level_.Width()) / 2;
-    y_ = static_cast<float>(level_.Height()) / 2;   
+    x_ = (level_.Width() - Player::size_) >> 1;
+    y_ = (level_.Height() - Player::size_) >> 1;   
 }
 
 auto Player::DrawMinimap(Pixels& pixels) const -> void {
-    // TODO: impl.
+    pixels.SetFill({.r = 255, .g = 0, .b = 0});
+    pixels.NoStroke();
+    pixels.Rect(x_, y_, Player::size_, Player::size_);
 }
