@@ -16,9 +16,9 @@ public:
 private:
     static constexpr unsigned size_ = 10;
 
-    unsigned x_ = 0;
-    unsigned y_ = 0;
+    float x_ = 0.0f;
+    float y_ = 0.0f;
+    float dir_ = 0.0f;
 
     Level level_;
-
 };

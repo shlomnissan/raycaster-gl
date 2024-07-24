@@ -44,6 +44,7 @@ set(GAME_SOURCES
     src/game/main.cpp
     src/game/player.cpp
     src/game/player.hpp
+    src/game/shared.hpp
 )
 
 add_executable(raycaster-gl ${LIBS_SOURCES} ${CORE_SOURCES} ${GAME_SOURCES})
