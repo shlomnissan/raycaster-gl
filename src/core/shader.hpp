@@ -7,7 +7,6 @@
 #include <string_view>
 #include <vector>
 
-#include <glm/glm.hpp>
 #include <glad/glad.h>
 
 enum class ShaderType {
@@ -27,10 +26,8 @@ public:
     auto Use() const -> void;
 
     auto GetUniform(std::string_view name) const -> GLint;
-    auto SetInt(std::string_view uniform, int i) const -> void;
-    auto SetFloat(std::string_view uniform, const float f) const -> void;
-    auto SetVec3(std::string_view uniform, const glm::vec3& vec) const -> void;
-    auto SetMat4(std::string_view uniform, const glm::mat4& matrix) const -> void;
+    auto SetUniform(std::string_view uniform, int i) const -> void;
+    auto SetUniform(std::string_view uniform, const float f) const -> void;
 
     ~Shader();
 

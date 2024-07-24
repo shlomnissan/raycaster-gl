@@ -18,7 +18,6 @@ ShaderString()
 find_package(fmt REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(glfw3 REQUIRED)
-find_package(glm REQUIRED)
 
 set(CORE_SOURCES
     src/core/mesh.cpp
@@ -54,4 +53,4 @@ target_include_directories(raycaster-gl PRIVATE
     ${CMAKE_SOURCE_DIR}/libs
 )
 
-target_link_libraries(raycaster-gl PRIVATE fmt::fmt glfw glm::glm OpenGL::GL)
+target_link_libraries(raycaster-gl PRIVATE fmt::fmt glfw OpenGL::GL)
